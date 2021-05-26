@@ -28,7 +28,7 @@ function Draw() {
             headers: { 
                 "authorization": `Bearer ${localStorage.getItem('token')}` 
             } 
-        }).then(result => window.location.replace("./dashboard")).catch(error => alert(error))
+        }).then(result => window.location.replace("adm/dashboard")).catch(error => alert(error))
     }
 
     return (

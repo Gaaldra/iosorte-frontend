@@ -15,11 +15,10 @@ function Portal({ match }) {
         })
             .then(result => {
                 localStorage.setItem('token', result.data.token)
-                window.location.href = `${match.path}/dashboard`
+                window.location.replace("adm/dashboard")
             })
             .catch(error => {
-                alert(error)
-                alert(user)
+                alert(error.response ? error.response.data.message : error)
             })
     }
 
