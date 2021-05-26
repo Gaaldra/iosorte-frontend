@@ -1,29 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import Loading from '../../loading';
+import React from 'react';
 import moment from '../../../services/moment';
-import api from '../../../services/api';
 
-function MeusSorteios() {
-    const [sorteios, setSorteios] = useState([]);
-    const [load, setLoad] = useState(true);
-
-    useEffect(() => {
-        api.get('/draw/my-draws/', {
-            headers: {
-                "Authorization": `Bearer ${localStorage.getItem('token')}`
-            }
-        })
-            .then(data => {
-                setSorteios(data.data.user.tickets);
-                setLoad(false)
-            })
-            .catch(error => {
-                if(error.response.status === 401) return window.location.href = '/'
-            });
-    }, []);
-
-    if (load) return <Loading />
-
+function MeusSorteios({ sorteios }) {
     return (
         <>
         {sorteios.length === 0 && <h1 style={{ color: 'white' }}>Você não possui sorteios</h1>}

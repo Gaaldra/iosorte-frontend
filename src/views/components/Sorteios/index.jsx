@@ -1,28 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import Loading from '../../loading';
+import React from 'react';
 import moment from '../../../services/moment';
 import api from '../../../services/api';
 
-function Sorteio() {
-    const [sorteios, setSorteios] = useState([]);
-    const [load, setLoad] = useState(true);
-
-    useEffect(() => {
-        api.get('/draw/', {
-            headers: {
-                "authorization": `Bearer ${localStorage.getItem('token')}`
-            }
-        })
-            .then(data => {
-                setSorteios(data.data.draws);
-                setLoad(false)
-            })
-            .catch(error => {
-                if (!error.response) return alert('Oh no. Parece que algo deu erro. Tenta novamente mais tarde.')
-                alert('Você será redirecionado')
-                if (error.response.status === 401) return window.location.href = '/'
-            });
-    }, []);
+function Sorteio({ sorteios, setSorteios }) {
 
     async function drawJoin(drawId) {
         api.post(`/draw/join`,
@@ -43,33 +23,8 @@ function Sorteio() {
             })
     }
 
-    if (load)
-        return (
-            <>
-                <Loading />
-                <div class="modal" id='myModal' tabindex="-1">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title">Modal title</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <p>Modal body text goes here.</p>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary" id='myInput'>Save changes</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </>
-        )
-
     return (
         <>
-
             {sorteios.length === 0 && <h1 style={{ color: 'white' }}>Não há sorteios por enquanto</h1>}
             {sorteios.map((sorteio) => {
                 return (
