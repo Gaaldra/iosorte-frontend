@@ -1,4 +1,3 @@
-import './css/form.css';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../services/api';
@@ -32,8 +31,8 @@ function Cadastro() {
     }
 
     return (
-        <div className="container full-height">
-            <div className='row align-items-center full-height'>
+        <div className="container">
+            <div className='row align-items-center full'>
                 <div className="box">
                     <form onSubmit={handleSubmit}>
                         <p className='title'>Cadastre-se</p>
@@ -69,7 +68,7 @@ function Cadastro() {
                     </form>
                     <p style={{marginBottom: '0', height: 24, color: 'red'}}>{alerta.mensagem}</p>
                     <br />
-                    <p>Já possui uma conta? <Link to='/'>Clique aqui para entrar</Link></p>
+                    <p>Já possui uma conta? <Link to='/entrar'>Clique aqui para entrar</Link></p>
                 </div>
             </div>
         </div>

@@ -2,6 +2,9 @@ import React from 'react';
 import moment from '../../../services/moment';
 
 function MeusSorteios({ sorteios }) {
+
+    console.log(sorteios)
+
     return (
         <>
         {sorteios.length === 0 && <h1 style={{ color: 'white' }}>Você não possui sorteios</h1>}
@@ -19,7 +22,7 @@ function MeusSorteios({ sorteios }) {
                                 </>}
                                 {!sorteio.active && <>
                                     <p className='card-text text-muted'>Ganhador</p>
-                                    <button className='btn btn-success btn-lg' disabled>{sorteio.winner}</button>
+                                    <button className='btn btn-success btn-lg' disabled>{sorteio.winner.name}</button>
                                 </>}
                             </div>
                         </div>

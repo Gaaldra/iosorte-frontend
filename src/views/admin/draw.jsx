@@ -3,7 +3,7 @@ import api from '../../services/api';
 
 function Draw() {
     const [award, setAward] = useState("")
-    const [date, setDate] = useState("")
+    const [date, setDate] = useState(new Date())
     const [game, setGame] = useState("")
     const [options, setOptions] = useState([])
 
@@ -28,7 +28,7 @@ function Draw() {
             headers: { 
                 "authorization": `Bearer ${localStorage.getItem('token')}` 
             } 
-        }).then(result => window.location.replace("adm/dashboard")).catch(error => alert(error))
+        }).then(result => window.location.href = "./dashboard").catch(error => alert(error))
     }
 
     return (
@@ -46,10 +46,10 @@ function Draw() {
                     type="text"
                     className="input iTxt"
                     value={award}
-                    onChange={e => setAward(e.target.value)}
+                    onChange={e => setAward(e.target.value.toUpperCase())}
                     placeholder="Award" />
                 <input
-                    type="date"
+                    type="datetime-local"
                     value={date}
                     className='input iTxt'
                     onChange={e => setDate(e.target.value)} />

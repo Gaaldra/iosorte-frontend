@@ -1,4 +1,3 @@
-import './css/form.css';
 import React, { Component } from "react"
 import { Link } from 'react-router-dom';
 import Api from '../services/api';
@@ -47,8 +46,8 @@ class Login extends Component {
     render() {
         return (
             <>
-                <div className="container full-height">
-                    <div className='row align-items-center full-height'>
+                <div className="container">
+                    <div className='row align-items-center full'>
                         <div className="box">
                             <form className="float-right" onSubmit={this.handleSubmit}>
                                 <p className="title">Login</p>

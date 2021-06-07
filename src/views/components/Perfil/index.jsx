@@ -4,7 +4,7 @@ import Icon from '../../../assets/user.png';
 function MeuPerfil({ user }) {
 
     return (
-        <div className="container mt-5 d-flex justify-content-center">
+        <div className="container mt-5 d-flex justify-content-center text-dark">
             <div className="card p-4 mt-3 text-center" style={{ width: '18rem', padding: 0 }}>
                 <h6 className="heading">Meu Perfil</h6>
                 <div className="d-flex flex-row mt-2 justify-content-center ">

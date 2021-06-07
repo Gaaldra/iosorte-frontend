@@ -28,7 +28,7 @@ function Sorteio({ sorteios, setSorteios }) {
             {sorteios.length === 0 && <h1 style={{ color: 'white' }}>Não há sorteios por enquanto</h1>}
             {sorteios.map((sorteio) => {
                 return (
-                    <div key={sorteio._id} className='col my-2'>
+                    <div key={sorteio._id} className='col mt-3'>
                         <div className='card border-success' style={{ width: '18rem', padding: 0 }}>
                             <img src={sorteio.game.urlImage} className='card-img-top' alt='Jogo' />
                             <div className="card-body text-center">

@@ -12,29 +12,29 @@ function NavBar({ onButtonClick }) {
     }
 
     return (
-        <ul className="nav nav-pills nav-fill">
-            <li className='nav-item'>
+        <ul className="nav nav-pills justify-content-center">
+            <li className='nav-item mx-1'>
                 <button
-                    className='nav-link active'
+                    className='nav-link text-white border active'
                     id='active'
                     value='0'
                     onClick={e => changePage(e)}>Sorteios</button>
             </li>
-            <li className='nav-item'>
+            <li className='nav-item mx-1'>
                 <button
-                    className='nav-link'
+                    className='nav-link text-white border'
                     value='1'
                     onClick={e => changePage(e)}>Meus tickets</button>
             </li>
-            <li className='nav-item'>
+            <li className='nav-item mx-1'>
                 <button
-                    className='nav-link'
+                    className='nav-link text-white border'
                     value='2'
                     onClick={e => changePage(e)}>Meu perfil</button>
             </li>
-            <li className='nav-item'>
+            <li className='nav-item mx-1'>
                 <button
-                    className='nav-link'
+                    className='nav-link text-white border'
                     value='3'
                     onClick={e => {
                         localStorage.removeItem('token')

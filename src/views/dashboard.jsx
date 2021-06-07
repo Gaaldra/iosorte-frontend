@@ -63,9 +63,10 @@ function Dashboard() {
 
     return (
         <>
+            <NavBar onButtonClick={setIndex} />
             <div className='container'>
-                <NavBar onButtonClick={setIndex} />
-                <div className='row justify-content-around row-cols-auto'>
+
+                <div className='row justify-content-center row-cols-auto text-dark'>
                     {pages[index]}
                 </div>
             </div>

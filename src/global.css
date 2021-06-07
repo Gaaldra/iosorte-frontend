@@ -1,27 +1,31 @@
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200&display=swap');
 * {
   margin: 0;
   padding: 0;
   border: 0;
   box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-.card-img-overlay {
-  background: rgba(0, 0, 0, 0.7);
+.fw {
+  min-width: 100%;
 }
 
-html, body, #root, .full-height {
+.fh {
   min-height: 100vh;
 }
 
-body {
-  background-color: #091008;
+.full {
+  min-width: 100%;
+  min-height: 100vh;
 }
 
+/* CSS FORMULÁRIOS */
 .box {
   width: 350px;
   padding: 40px;
-  background: #1f2f22;
+  background: #16181b;
   color: #f1faee;
   text-align: center;
   border-radius: 10px;
@@ -29,7 +33,7 @@ body {
 }
 
 .input {
-  border: 2px solid #3e563e;
+  border: 2px solid #2C3237;
   border-radius: 24px;
   background: none;
   display: block;
@@ -55,9 +59,27 @@ body {
   outline: none;
   color: white;
   padding: 14px 40px;
-  font-family: 'Source Sans Pro', sans-serif;
 }
 
 .iOthers option{
   color: black;
+}
+
+.title {
+  font-size: 32px;
+  text-transform: uppercase;
+}
+
+.iTxt:focus {
+  width: 260px;
+  border-color: #434b53;
+}
+
+.iBtn {
+  padding: 14px 40px;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.iBtn:hover {
+  background-color: #434b53;
 }
