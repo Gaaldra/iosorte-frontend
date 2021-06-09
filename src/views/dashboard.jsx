@@ -28,8 +28,10 @@ function Dashboard() {
             })
             .catch(error => {
                 if (!error.response) return alert('Oh no. Parece que algo deu erro. Tenta novamente mais tarde.')
-                alert('Você será redirecionado')
-                if (error.response.status === 401) return window.location.href = '/'
+                if (error.response.status === 401) {
+                    alert('Você será redirecionado')
+                    return window.location.href = '/'
+                }
             });
     }, []);
 
