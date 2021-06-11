@@ -6,30 +6,29 @@ import Loading from '../loading';
 function PortalAdm({ match }) {
     const [draws, setDraws] = useState([]);
     const [games, setGames] = useState([]);
-    const [load, setLoad] = useState(false);
+    const [load, setLoad] = useState(true);
 
     useEffect(() => {
-        api.get('/secret/games', {
+        api.get("/secret/dashboard", {
             headers: {
-                "authorization": `Bearer ${localStorage.getItem('token')}`
+                "authorization": `Bearer ${localStorage.getItem("token")}`
             }
-        }).then(result => {
-            setGames(result.data.games)
-            setLoad(true)
-        }).catch(error => null);
-
-        api.get('secret/draws', {
-            headers: {
-                "authorization": `Bearer ${localStorage.getItem('token')}`
+        }).then(response => {
+            const data = response.data
+            setDraws(data.draws)
+            setGames(data.games)
+            setLoad(false)
+        }).catch(error => {
+            if (!error.response) return alert("Ocorreu algum problema");
+            if (error.response.status === 401) {
+                localStorage.removeItem("token")
+                alert("Você será redirecionado");
+                window.location.href = ""
             }
-        }).then(result => {
-            setDraws(result.data.draws)
-            setLoad(true)
-        }).catch(error => null);
-
+        })
     }, [])
 
-    if (!load) return <Loading />
+    if (load) return <Loading />
 
     return (
         <div className="accordion text-dark" id="accordionMain">
@@ -49,10 +48,6 @@ function PortalAdm({ match }) {
                         <button className="btn btn-success" onClick={() => window.location.replace('./add-draw')}><i className="fas fa-plus"></i></button>
                         <div className="row justify-content-around">
                             {draws.map(draw => {
-                                const dateDraw = new Date(draw.drawDate)
-
-                                console.log(dateDraw)
-                                
                                 return (
                                     <div key={draw._id} className='col my-2'>
                                         <div className='card border-success' style={{ width: '18rem', padding: 0 }}>
@@ -66,7 +61,6 @@ function PortalAdm({ match }) {
                                                 </>}
                                                 {!draw.active && <>
                                                     <p className='card-text text-muted'>Ganhador: {draw.winner.name}</p>
-                                                    <button className='btn btn-success btn-lg' disabled>{dateDraw.getDate()}</button>
                                                 </>}
                                             </div>
                                         </div>
