@@ -21,36 +21,24 @@ function Dashboard() {
             headers: {
                 "authorization": `Bearer ${localStorage.getItem('token')}`
             }
-        })
-            .then(data => {
-                setDraws(data.data.draws);
-                setLoad(false)
-            })
-            .catch(error => {
-                if (!error.response) return alert('Oh no. Parece que algo deu erro. Tenta novamente mais tarde.')
-                if (error.response.status === 401) {
-                    alert('Você será redirecionado')
-                    return window.location.href = '/'
-                }
-            });
-    }, []);
-
-    useEffect(() => {
-        api.get('/draw/my-draws/', {
-            headers: {
-                "Authorization": `Bearer ${localStorage.getItem('token')}`
+        }).then(response => {
+            const { data } = response
+            setDraws(data.draws)
+            setUser(data.user)
+            setMyDraws(data.user.tickets)
+            setLoad(false)
+        }).catch(error => {
+            console.log(error)
+            if (!error.response) return alert('Ocorreu algum erro. Tente novamente mais tarde!');
+            if (error.response.status === 401) {
+                localStorage.removeItem('token');
+                alert('Você será redirecionado');
+                window.location.href = "/entrar";
+                return;
             }
+            alert('Serviço indisponível no momento')
         })
-            .then(data => {
-                setMyDraws(data.data.user.tickets);
-                setUser(data.data.user)
-                setLoad(false)
-            })
-            .catch(error => {
-                if (!error.response) return window.location.href = '/'
-                if (error.response.status === 401) return window.location.href = '/'
-            });
-    }, [draws])
+    }, []);
 
     const pages = {
         0: <Sorteios sorteios={draws} setSorteios={setDraws} setMyDraws={setMyDraws} />,
@@ -67,7 +55,6 @@ function Dashboard() {
         <>
             <NavBar onButtonClick={setIndex} />
             <div className='container'>
-
                 <div className='row justify-content-center row-cols-auto text-dark'>
                     {pages[index]}
                 </div>
