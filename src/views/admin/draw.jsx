@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import api from '../../services/api';
+import moment from 'moment';
 
 function Draw() {
     const [award, setAward] = useState("")
-    const [date, setDate] = useState(new Date())
+    const [date, setDate] = useState(moment().hour(23).minutes(59).format('YYYY-MM-DDTHH:mm'))
     const [game, setGame] = useState("")
     const [options, setOptions] = useState([])
 
