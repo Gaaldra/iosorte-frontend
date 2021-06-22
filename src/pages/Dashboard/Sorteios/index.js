@@ -1,9 +1,8 @@
-import React from 'react';
-import moment from '../../../services/moment';
-import api from '../../../services/api';
+import React, { useEffect, useState } from 'react';
+import countDown from "../../../utils/countDown";
+import api from "../../../services/api";
 
-function Sorteio({ sorteios, setSorteios }) {
-
+function Sorteio({ sorteios }) {
     async function drawJoin(drawId) {
         api.post(`/draw/join`,
             { id: drawId },
@@ -14,8 +13,7 @@ function Sorteio({ sorteios, setSorteios }) {
             })
             .then(response => {
                 alert(response.data.message)
-                const items = sorteios.filter(item => item._id !== drawId)
-                setSorteios(items)
+                window.location.reload()
             })
             .catch(error => {
                 if (error.response.message) return alert(error.response.message);
@@ -36,7 +34,7 @@ function Sorteio({ sorteios, setSorteios }) {
                                 <p className='card-text'>{sorteio.game.name}</p>
                                 {sorteio.active && <>
                                     <button className='btn btn-success btn-lg' onClick={() => drawJoin(sorteio._id)}>Participar</button>
-                                    <p className='card-text'><small className='text-muted'>{moment(sorteio.drawDate).fromNow()}</small></p>
+                                    {Draw(sorteio.drawDate)}
                                 </>}
                                 {!sorteio.active && <>
                                     <p className='card-text text-muted'>Ganhador</p>
@@ -52,3 +50,18 @@ function Sorteio({ sorteios, setSorteios }) {
 }
 
 export default Sorteio;
+
+function Draw(draw) {
+
+    const [timeLeft, setTimeLeft] = useState(countDown(draw));
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setTimeLeft(countDown(draw));
+        }, 1000);
+    });
+
+    return (
+        <p className='card-text'><small className='text-muted'>{timeLeft}</small></p>
+    )
+}

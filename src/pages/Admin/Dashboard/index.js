@@ -1,9 +1,10 @@
-import moment from 'moment';
 import React, { useEffect, useState } from 'react';
-import api from '../../services/api';
-import Loading from '../loading';
+import api from "../../../services/api";
+import Loading from "../../Loading/index";
+import countDown from "../../../utils/countDown";
+import { Link } from 'react-router-dom';
 
-function PortalAdm({ match }) {
+function Dashboard() {
     const [draws, setDraws] = useState([]);
     const [games, setGames] = useState([]);
     const [load, setLoad] = useState(true);
@@ -49,22 +50,7 @@ function PortalAdm({ match }) {
                         <div className="row justify-content-around">
                             {draws.map(draw => {
                                 return (
-                                    <div key={draw._id} className='col my-2'>
-                                        <div className='card border-success' style={{ width: '18rem', padding: 0 }}>
-                                            <img src={draw.game.urlImage} className='card-img-top' alt='Jogo' />
-                                            <div className="card-body text-center">
-                                                <h5 className='card-title'>{draw.award}</h5>
-                                                <p className='card-text'>{draw.game.name}</p>
-                                                {draw.active && <>
-                                                    <button className='btn btn-success btn-lg'>Sortear</button>
-                                                    <p className='card-text text-muted'>{moment(draw.drawDate).fromNow()}</p>
-                                                </>}
-                                                {!draw.active && <>
-                                                    <p className='card-text text-muted'>Ganhador: {draw.winner.name}</p>
-                                                </>}
-                                            </div>
-                                        </div>
-                                    </div>
+                                  <Draw draw={draw} />
                                 )
                             })}
                         </div>
@@ -94,7 +80,7 @@ function PortalAdm({ match }) {
                                             <div className="card-body text-center">
                                                 <h5 className='card-title'>{game.name}</h5>
                                                 <p className='card-text'>{game.description}</p>
-                                                <button className='btn btn-success btn-lg'>Modificar</button>
+                                                <Link to='/adm/add-game' className='btn btn-success btn-lg'>Modificar</Link>
                                             </div>
                                         </div>
                                     </div>
@@ -108,4 +94,34 @@ function PortalAdm({ match }) {
     )
 }
 
-export default PortalAdm;
+export default Dashboard;
+
+function Draw({ draw }) {
+
+    const [timeLeft, setTimeLeft] = useState(countDown(draw.drawDate));
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setTimeLeft(countDown(draw.drawDate));
+        }, 1000);
+    });
+
+    return (
+        <div key={draw._id} className='col my-2'>
+            <div className='card border-success' style={{ width: '18rem', padding: 0 }}>
+                <img src={draw.game.urlImage} className='card-img-top' alt='Jogo' />
+                <div className="card-body text-center">
+                    <h5 className='card-title'>{draw.award}</h5>
+                    <p className='card-text'>{draw.game.name}</p>
+                    {draw.active && <>
+                        <button className='btn btn-success btn-lg'>Sortear</button>
+                        <p className='card-text text-muted'>{timeLeft}</p>
+                    </>}
+                    {!draw.active && <>
+                        <p className='card-text text-muted'>Ganhador: {draw.winner.name}</p>
+                    </>}
+                </div>
+            </div>
+        </div>
+    )
+}

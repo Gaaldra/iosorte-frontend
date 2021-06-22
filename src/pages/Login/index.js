@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { Link } from 'react-router-dom';
-import Api from '../services/api';
+import Api from '../../services/api';
 
 class Login extends Component {
     constructor(props) {

@@ -1,7 +1,7 @@
-import './css/loading.css'
+import './index.css'
 import React from 'react';
-import nome from '../assets/logo1.png';
-import trevo from '../assets/logo2.png';
+import nome from "../../assets/logo1.png";
+import trevo from '../../assets/logo2.png';
 
 function Loading() {
     return (

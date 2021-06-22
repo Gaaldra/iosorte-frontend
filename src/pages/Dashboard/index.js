@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
-import api from '../services/api.js';
+import api from '../../services/api';
 
 //Components
-import NavBar from './components/NavBar/index.jsx'
-import Sorteios from './components/Sorteios/index.jsx';
-import MeusSorteios from './components/MeusSorteios/index.jsx';
-import Perfil from './components/Perfil/index.jsx';
-import Loading from './loading.jsx';
+import NavBar from "./NavBar/index"
+import Sorteios from "./Sorteios/index";
+import MeusSorteios from "./MeusSorteios/index";
+import Perfil from "./Perfil/index";
+import Loading from "../Loading/index";
 
 function Dashboard() {
 

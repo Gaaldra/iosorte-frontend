@@ -11,12 +11,10 @@ function MeuPerfil({ user }) {
                     <div className="image mr-3"> <img src={Icon} className="rounded-circle" width="60" alt="Perfil" /> </div>
                 </div>
                 <hr className="line-color" />
-                <h5 className="card-title">
-                    {user.name}
-                </h5>
-                <p className="card-text">
-                    {user.email}
-                </p>
+                <input value={user.name} className="card-title text-center" />
+                <input value={user.email} className="card-text text-center" />
+                <input placeholder="Sua senha" className="my-2 form-control text-center" />
+                <button type='submit' className='btn btn-success'>Salvar</button>
             </div>
         </div>
 

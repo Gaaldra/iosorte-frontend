@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import api from '../../services/api';
+import api from "../../../services/api";
 
-
-function Portal({ match }) {
+function Login() {
 
     const [user, setUser] = useState('')
     const [pass, setPass] = useState('')
@@ -52,4 +51,4 @@ function Portal({ match }) {
     )
 }
 
-export default Portal;
+export default Login;

@@ -2,7 +2,7 @@ import React from 'react';
 import Logo from '../../assets/logo.png';
 import { Link } from 'react-router-dom';
 
-function Home() {
+export default function Home() {
     return (
         <section>
             <div className="bd-masthead mb-3 mt-3 mt-md-5 pt-md-5">
@@ -22,9 +22,6 @@ function Home() {
                     </div>
                 </div>
             </div>
-
         </section>
     )
 }
-
-export default Home;

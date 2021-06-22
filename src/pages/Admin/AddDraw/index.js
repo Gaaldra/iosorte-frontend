@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import api from '../../services/api';
+import api from "../../../services/api";
 import moment from 'moment';
 
 function Draw() {
@@ -9,7 +9,7 @@ function Draw() {
     const [options, setOptions] = useState([])
 
     useEffect(() => {
-        api.get('/secret/games', {
+        api.get('/secret/dashboard', {
             headers: {
                 "authorization": `Bearer ${localStorage.getItem('token')}`
             }
