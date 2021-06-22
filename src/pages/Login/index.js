@@ -74,7 +74,7 @@ class Login extends Component {
                             <p style={{marginBottom: '0', height: 24, color: this.state.color}}>{this.state.response}</p>
                             <br></br>
                             <p>Não tem conta? <Link to="/cadastrar">Cadastre-se aqui</Link></p>
-                            <p>Esqueceu sua senha? <Link to='/'>Recupere aqui</Link></p>
+                            <p>Esqueceu sua senha? <Link to='/forgot-password'>Recupere aqui</Link></p>
                         </div>
                     </div>
                 </div>
