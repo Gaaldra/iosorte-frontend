@@ -46,11 +46,11 @@ function Dashboard() {
                 </h2>
                 <div className="accordion-collapse collapse" id="collapseOne" aria-labelledby="headingOne" data-bs-parent="#accordionMain">
                     <div className="accordion-body">
-                        <button className="btn btn-success" onClick={() => window.location.replace('./add-draw')}><i className="fas fa-plus"></i></button>
+                        <Link to="/adm/add-draw" className="btn btn-success"><i className="fas fa-plus"></i></Link>
                         <div className="row justify-content-around">
                             {draws.map(draw => {
                                 return (
-                                  <Draw draw={draw} />
+                                    <Draw draw={draw} />
                                 )
                             })}
                         </div>
@@ -70,7 +70,7 @@ function Dashboard() {
                 </h2>
                 <div className="accordion-collapse collapse" id="collapseTwo" aria-labelledby="headingTwo" data-bs-parent="#accordionMain">
                     <div className="accordion-body">
-                        <button className="btn btn-success" onClick={() => window.location.replace('./add-game')}><i className="fas fa-plus"></i></button>
+                        <Link to="/adm/add-game" className="btn btn-success"><i className="fas fa-plus"></i></Link>
                         <div className="row justify-content-around">
                             {games.map(game => {
                                 return (
@@ -106,6 +106,23 @@ function Draw({ draw }) {
         }, 1000);
     });
 
+    const sortear = (id) => {
+        api.post('secret/roll-dice',
+            { drawId: id },
+            {
+                headers: {
+                    "authorization": `Bearer ${localStorage.getItem("token")}`
+                }
+            }
+        ).then(result => {
+            alert(result.data.message)
+            window.location.reload(true)
+        }).catch(error => {
+            console.log(error)
+            alert("Erro ao sortear")
+        })
+    }
+
     return (
         <div key={draw._id} className='col my-2'>
             <div className='card border-success' style={{ width: '18rem', padding: 0 }}>
@@ -114,7 +131,7 @@ function Draw({ draw }) {
                     <h5 className='card-title'>{draw.award}</h5>
                     <p className='card-text'>{draw.game.name}</p>
                     {draw.active && <>
-                        <button className='btn btn-success btn-lg'>Sortear</button>
+                        <button className='btn btn-success btn-lg' onClick={() => sortear(draw._id)} >Sortear</button>
                         <p className='card-text text-muted'>{timeLeft}</p>
                     </>}
                     {!draw.active && <>
